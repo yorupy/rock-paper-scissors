@@ -61,6 +61,7 @@ function handleChoiceClick() {
             appendLog(createLog(result));
             updateGame(result);
             updateScores();
+            scrollResults();
         })
     })
 }
@@ -82,6 +83,13 @@ function updateScores() {
     humanScoreSpan.textContent = humanScore;
     const computerScoreSpan = document.querySelector(".computer-score");
     computerScoreSpan.textContent = computerScore;
+}
+
+function scrollResults() {
+    const results = document.querySelector(".results");
+    if (results.scrollHeight > results.clientHeight) {
+        results.scrollTop = results.scrollHeight;
+    }
 }
 
 handleChoiceClick();

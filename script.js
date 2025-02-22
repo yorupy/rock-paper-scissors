@@ -66,13 +66,26 @@ function playGame() {
 
 const choiceButtons = document.querySelectorAll(".choices button");
 
-function playRoundOnClick() {
+function handleChoiceClick() {
     choiceButtons.forEach((button) => {
         button.addEventListener('click', (e) => {
             const id = e.target.id;
-            console.log(playRound(id, getComputerChoice()))
+            const result = playRound(id, getComputerChoice());
+            appendLog(createLog(result));
         })
     })
 }
 
-playRoundOnClick();
+function appendLog(log) {
+    const resultsDiv = document.querySelector(".results");
+    resultsDiv.appendChild(log);
+}
+
+function createLog(log) {
+    const newLog = document.createElement("p");
+    newLog.textContent = log;
+    newLog.classList.add("log");
+    return newLog;
+}
+
+handleChoiceClick();

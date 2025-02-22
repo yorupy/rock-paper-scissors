@@ -5,3 +5,17 @@ function getComputerChoice() {
     else return "scissors";
 }
 
+function getHumanChoice() {
+    let choice = "";
+    do {
+        choice = prompt("rock, paper or scissors: ");
+        choice = choice.toLowerCase();
+    } while (choice !== "rock" && choice !== "paper" && choice !== "scissors");
+    return choice;
+}
+
+function capitalize(text) {
+    return text[0].toUpperCase() + text.slice(1);
+}
+
+console.log(getHumanChoice());

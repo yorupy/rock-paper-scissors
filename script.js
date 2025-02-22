@@ -29,19 +29,9 @@ function generateRoundString(winner, winnerChoice, loserChoice) {
 }
 
 function updateGame(result) {
-
     if (result.startsWith("It")) return;
     else if (result.startsWith("Human")) humanScore++;
     else computerScore++;
-
-    if (humanScore === 5 || computerScore === 5) {
-        disableButtons();
-        if (humanScore === 5) {
-            appendLog(createLog("Human wins the game! Computers suck at RPS!"));
-        } else {
-            appendLog(createLog("Computer wins the game! Machines will rule the world!"));
-        }
-    }
 }
 
 function disableButtons() {
@@ -58,10 +48,8 @@ function handleChoiceClick() {
         button.addEventListener('click', (e) => {
             const id = e.target.id;
             const result = playRound(id, getComputerChoice());
-            appendLog(createLog(result));
             updateGame(result);
-            updateScores();
-            scrollResults();
+            updateView(createLog(result));
         })
     })
 }
@@ -90,6 +78,20 @@ function scrollResults() {
     if (results.scrollHeight > results.clientHeight) {
         results.scrollTop = results.scrollHeight;
     }
+}
+
+function updateView(newLog) {
+    appendLog(newLog);
+    if (humanScore === 5 || computerScore === 5) {
+        disableButtons();
+        if (humanScore === 5) {
+            appendLog(createLog("Human wins the game! Computers suck at RPS!"));
+        } else {
+            appendLog(createLog("Computer wins the game! Machines will rule the world!"));
+        }
+    }
+    updateScores();
+    scrollResults();
 }
 
 handleChoiceClick();

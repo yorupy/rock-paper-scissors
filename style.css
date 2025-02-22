@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(230, 230, 240);
+}
+
+main {
+    width: 800px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.choices button {
+    padding: 10px 30px;
+}
+
+.scores {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.results {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: rgb(10, 30, 40);
+    height: 250px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: scroll;
+    padding: 20px;
+    font-size: 18px;
+}
+
+.scores p {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.scores p span {
+    font-weight: normal;
+}

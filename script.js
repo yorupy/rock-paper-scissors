@@ -1,4 +1,29 @@
+let humanScore = 0;
+let computerScore = 0;
 
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        return "It is a draw!";
+    } else if (humanChoice === "rock") {
+        if (computerChoice === "paper") {
+            return generateRoundString("Computer", computerChoice, humanChoice);
+        } else {
+            return generateRoundString("Human", humanChoice, computerChoice);
+        }
+    } else if (humanChoice === "paper") {
+        if (computerChoice === "scissors") {
+            return generateRoundString("Computer", computerChoice, humanChoice);
+        } else {
+            return generateRoundString("Human", humanChoice, computerChoice);
+        }
+    } else {
+        if (computerChoice === "rock") {
+            return generateRoundString("Computer", computerChoice, humanChoice);
+        } else {
+            return generateRoundString("Human", humanChoice, computerChoice);
+        }
+    }
+}
 
 function getComputerChoice() {
     const randomNumber = Math.floor(Math.random() * 3);
@@ -20,38 +45,12 @@ function capitalize(text) {
     return text[0].toUpperCase() + text.slice(1);
 }
 
-
-
 function generateRoundString(winner, winnerChoice, loserChoice) {
     return `${winner} wins! ${capitalize(winnerChoice)} beats ${capitalize(loserChoice)}`;
 }
 
 function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    function playRound(humanChoice, computerChoice) {
-        if (humanChoice === computerChoice) {
-            return "It is a draw!";
-        } else if (humanChoice === "rock") {
-            if (computerChoice === "paper") {
-                return generateRoundString("Computer", computerChoice, humanChoice);
-            } else {
-                return generateRoundString("Human", humanChoice, computerChoice);
-            }
-        } else if (humanChoice === "paper") {
-            if (computerChoice === "scissors") {
-                return generateRoundString("Computer", computerChoice, humanChoice);
-            } else {
-                return generateRoundString("Human", humanChoice, computerChoice);
-            }
-        } else {
-            if (computerChoice === "rock") {
-                return generateRoundString("Computer", computerChoice, humanChoice);
-            } else {
-                return generateRoundString("Human", humanChoice, computerChoice);
-            }
-        }
-    }
+
     while (humanScore !== 5 && computerScore !== 5) {
         const result = playRound(getHumanChoice(), getComputerChoice());
         if (result.startsWith("Human")) humanScore++;
@@ -65,4 +64,15 @@ function playGame() {
     }
 }
 
-playGame();
+const choiceButtons = document.querySelectorAll(".choices button");
+
+function playRoundOnClick() {
+    choiceButtons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            const id = e.target.id;
+            console.log(playRound(id, getComputerChoice()))
+        })
+    })
+}
+
+playRoundOnClick();

@@ -20,15 +20,6 @@ function getComputerChoice() {
     else return "scissors";
 }
 
-function getHumanChoice() {
-    let choice = "";
-    do {
-        choice = prompt("rock, paper or scissors: ");
-        choice = choice.toLowerCase();
-    } while (choice !== "rock" && choice !== "paper" && choice !== "scissors");
-    return choice;
-}
-
 function capitalize(text) {
     return text[0].toUpperCase() + text.slice(1);
 }
@@ -37,19 +28,27 @@ function generateRoundString(winner, winnerChoice, loserChoice) {
     return `${winner} wins! ${capitalize(winnerChoice)} beats ${capitalize(loserChoice)}`;
 }
 
-function playGame() {
+function updateGame(result) {
 
-    while (humanScore !== 5 && computerScore !== 5) {
-        const result = playRound(getHumanChoice(), getComputerChoice());
-        if (result.startsWith("Human")) humanScore++;
-        else if (result.startsWith("Computer")) computerScore++;
-        console.log(result);
+    if (result.startsWith("It")) return;
+    else if (result.startsWith("Human")) humanScore++;
+    else computerScore++;
+
+    if (humanScore === 5 || computerScore === 5) {
+        disableButtons();
+        if (humanScore === 5) {
+            appendLog(createLog("Human wins the game! Computers suck at RPS!"));
+        } else {
+            appendLog(createLog("Computer wins the game! Machines will rule the world!"));
+        }
     }
-    if (humanScore === 5) {
-        console.log("Human wins the game! Computers suck at RPS!");
-    } else {
-        console.log("Computer wins the game! Machines will rule the world!");
-    }
+}
+
+function disableButtons() {
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.disabled = true;
+    })
 }
 
 const choiceButtons = document.querySelectorAll(".choices button");
@@ -60,6 +59,7 @@ function handleChoiceClick() {
             const id = e.target.id;
             const result = playRound(id, getComputerChoice());
             appendLog(createLog(result));
+            updateGame(result);
         })
     })
 }

@@ -1,27 +1,15 @@
 let humanScore = 0;
 let computerScore = 0;
 
+const choices = ["rock", "paper", "scissors", "rock", "paper"]
+
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         return "It is a draw!";
-    } else if (humanChoice === "rock") {
-        if (computerChoice === "paper") {
-            return generateRoundString("Computer", computerChoice, humanChoice);
-        } else {
-            return generateRoundString("Human", humanChoice, computerChoice);
-        }
-    } else if (humanChoice === "paper") {
-        if (computerChoice === "scissors") {
-            return generateRoundString("Computer", computerChoice, humanChoice);
-        } else {
-            return generateRoundString("Human", humanChoice, computerChoice);
-        }
+    } else if (computerChoice === choices[choices.indexOf(humanChoice) + 1]) {
+        return generateRoundString("Computer", computerChoice, humanChoice);
     } else {
-        if (computerChoice === "rock") {
-            return generateRoundString("Computer", computerChoice, humanChoice);
-        } else {
-            return generateRoundString("Human", humanChoice, computerChoice);
-        }
+        return generateRoundString("Human", humanChoice, computerChoice);
     }
 }
 

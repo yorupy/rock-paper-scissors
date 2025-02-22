@@ -60,6 +60,7 @@ function handleChoiceClick() {
             const result = playRound(id, getComputerChoice());
             appendLog(createLog(result));
             updateGame(result);
+            updateScores();
         })
     })
 }
@@ -74,6 +75,13 @@ function createLog(log) {
     newLog.textContent = log;
     newLog.classList.add("log");
     return newLog;
+}
+
+function updateScores() {
+    const humanScoreSpan = document.querySelector(".human-score");
+    humanScoreSpan.textContent = humanScore;
+    const computerScoreSpan = document.querySelector(".computer-score");
+    computerScoreSpan.textContent = computerScore;
 }
 
 handleChoiceClick();
